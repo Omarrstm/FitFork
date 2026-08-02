@@ -111,7 +111,7 @@ export default function ListingForm({
   }
 
   const inputClass =
-    "w-full px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500";
+    "w-full px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-500 bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-green-500";
   const labelClass = "block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1";
 
   return (

@@ -67,9 +67,10 @@ export default function SignUpPage() {
           <input
             type="text"
             required
+            placeholder="Jane Doe"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-500 bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
         <div>
@@ -79,9 +80,10 @@ export default function SignUpPage() {
           <input
             type="email"
             required
+            placeholder="xxxxxxxx@gmail.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-500 bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
         <div>
@@ -92,9 +94,10 @@ export default function SignUpPage() {
             type="password"
             required
             minLength={8}
+            placeholder="At least 8 characters"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-500 bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
 

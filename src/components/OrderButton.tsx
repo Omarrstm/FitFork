@@ -90,7 +90,7 @@ export default function OrderButton({
           onChange={(e) =>
             setQuantity(Math.max(1, Math.min(servingsAvailable, Number(e.target.value))))
           }
-          className="w-20 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-600 bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-20 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-500 bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
         />
         <span className="text-sm text-zinc-500 dark:text-zinc-400">
           of {servingsAvailable} available
