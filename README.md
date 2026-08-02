@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FitFork
 
-## Getting Started
+A marketplace connecting home cooks with buyers who care about their macros.
+Cooks list home-cooked meals with a full nutrition breakdown (calories,
+protein, carbs, fat) and diet tags (vegan, keto, halal, gluten-free, etc.);
+buyers browse, filter, and place orders.
 
-First, run the development server:
+Live: https://fitfork-ochre.vercel.app
+
+<!-- Add screenshots here: landing page, browse grid, listing detail, cook dashboard -->
+
+## Stack
+
+- **Next.js (App Router) + TypeScript + Tailwind CSS**
+- **Prisma ORM + PostgreSQL**, using Prisma 7's driver-adapter API (`@prisma/adapter-pg`)
+- **NextAuth (Auth.js) v5** — Credentials provider, JWT sessions
+- **Vercel Blob** for listing photo uploads
+- **Zod** for API input validation
+- Deployed on **Vercel**
+
+## Features
+
+- Auth: email/password signup and login (any account can act as both a cook
+  and a buyer)
+- Cooks: create/edit/delete listings with macros, diet tags, price,
+  servings, city, and a photo upload
+- Buyers: browse with live filters (search, city, min protein, max
+  calories, diet tags), view full listing detail, place an order
+- Orders: a real status lifecycle (`PENDING -> CONFIRMED -> COMPLETED`, or
+  `CANCELLED`) enforced server-side via an explicit transition table, with a
+  buyer order-history view and a cook incoming-orders dashboard
+
+## Running locally
 
 ```bash
+npm install
+npx prisma migrate dev   # applies the schema to your DATABASE_URL
+npx prisma db seed       # seeds diet tags
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You'll need a `.env` with:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+DATABASE_URL=postgres://...
+AUTH_SECRET=...           # generate with: openssl rand -base64 32
+BLOB_READ_WRITE_TOKEN=... # from a Vercel Blob store, for photo uploads
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Notes
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This is scoped as a portfolio project, not a production marketplace:
+checkout is simulated (no real payment processing), and location is a plain
+city text field rather than geolocation/delivery logistics.
