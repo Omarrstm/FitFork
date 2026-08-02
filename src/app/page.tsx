@@ -20,10 +20,7 @@ const features = [
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden">
-      <div className="absolute top-10 -left-24 w-96 h-96 bg-green-300/20 dark:bg-green-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 -right-24 w-96 h-96 bg-orange-300/20 dark:bg-orange-600/10 rounded-full blur-3xl pointer-events-none" />
-
+    <div>
       <section className="relative max-w-5xl mx-auto px-6 py-28 text-center">
         <p className="text-green-600 dark:text-green-400 font-mono text-sm mb-4 tracking-widest uppercase">
           Home-cooked, tracked to the macro
