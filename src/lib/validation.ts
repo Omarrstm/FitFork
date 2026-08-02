@@ -22,3 +22,19 @@ export const listingUpdateSchema = listingSchema
   .extend({ dietTagIds: z.array(z.string()).optional() });
 
 export type ListingUpdateInput = z.infer<typeof listingUpdateSchema>;
+
+export const orderCreateSchema = z.object({
+  listingId: z.string().min(1),
+  quantity: z.number().int().positive("Quantity must be at least 1"),
+});
+
+export const ORDER_STATUS_TRANSITIONS: Record<string, string[]> = {
+  PENDING: ["CONFIRMED", "CANCELLED"],
+  CONFIRMED: ["COMPLETED", "CANCELLED"],
+  COMPLETED: [],
+  CANCELLED: [],
+};
+
+export const orderStatusUpdateSchema = z.object({
+  status: z.enum(["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"]),
+});

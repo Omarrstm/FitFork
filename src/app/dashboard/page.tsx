@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import DeleteListingButton from "@/components/DeleteListingButton";
+import OrderStatusControl from "@/components/OrderStatusControl";
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -86,9 +87,7 @@ export default async function DashboardPage() {
                   from {order.buyer.name}
                 </p>
               </div>
-              <span className="text-xs font-mono px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300">
-                {order.status}
-              </span>
+              <OrderStatusControl orderId={order.id} status={order.status} />
             </div>
           ))}
         </div>
