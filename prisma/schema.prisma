@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  city         String?
+  bio          String?
+  avatarUrl    String?
+  createdAt    DateTime  @default(now())
+  listings     Listing[] @relation("CookListings")
+  orders       Order[]   @relation("BuyerOrders")
+}
+
+model Listing {
+  id          String           @id @default(cuid())
+  cookId      String
+  cook        User             @relation("CookListings", fields: [cookId], references: [id])
+  title       String
+  description String
+  imageUrl    String?
+  price       Decimal
+  servings    Int
+  calories    Int
+  protein     Int
+  carbs       Int
+  fat         Int
+  city        String
+  isActive    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  dietTags    ListingDietTag[]
+  orders      Order[]
+}
+
+model DietTag {
+  id       String           @id @default(cuid())
+  name     String           @unique
+  listings ListingDietTag[]
+}
+
+model ListingDietTag {
+  listingId String
+  dietTagId String
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  dietTag   DietTag @relation(fields: [dietTagId], references: [id], onDelete: Cascade)
+
+  @@id([listingId, dietTagId])
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model Order {
+  id         String      @id @default(cuid())
+  listingId  String
+  listing    Listing     @relation(fields: [listingId], references: [id])
+  buyerId    String
+  buyer      User        @relation("BuyerOrders", fields: [buyerId], references: [id])
+  quantity   Int
+  totalPrice Decimal
+  status     OrderStatus @default(PENDING)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
