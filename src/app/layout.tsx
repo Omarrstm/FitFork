@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,10 +15,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "FitFork — Home-cooked meals, tracked to the macro";
+const description =
+  "A marketplace connecting home cooks with buyers who care about their macros — browse meals by calories, protein, carbs, and diet.";
+
 export const metadata: Metadata = {
-  title: "FitFork — Home-cooked meals, tracked to the macro",
-  description:
-    "A marketplace connecting home cooks with buyers who care about their macros — browse meals by calories, protein, carbs, and diet.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
@@ -35,6 +50,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           <main className="flex-1">{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>
