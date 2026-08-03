@@ -4,8 +4,12 @@ import { prisma } from "../src/lib/prisma";
 
 const DEMO_PASSWORD = "Demo1234!";
 
-function img(seed: string) {
-  return `https://picsum.photos/seed/${seed}/800/600`;
+// Real, freely-licensed food photos from Wikimedia Commons, chosen to
+// closely match each dish. ?width=800 requests a thumbnail rather than
+// the full-resolution original (Wikimedia rate-limits/discourages
+// hotlinking originals directly).
+function img(filename: string) {
+  return `https://commons.wikimedia.org/wiki/Special:FilePath/${filename}?width=800`;
 }
 
 async function getTagIds(names: string[]) {
@@ -42,7 +46,7 @@ async function main() {
       carbs: 48,
       fat: 14,
       tags: ["High-Protein", "Low-Carb"],
-      img: "chicken-quinoa",
+      img: "Green_Chicken_with_Rice_and_cucumber_salad_top_shot.jpg",
     },
     {
       cookId: elif.id,
@@ -57,7 +61,7 @@ async function main() {
       carbs: 44,
       fat: 15,
       tags: ["High-Protein", "Gluten-Free"],
-      img: "turkey-meatballs",
+      img: "Chicken_Meat_balls.JPG",
     },
     {
       cookId: mert.id,
@@ -72,7 +76,7 @@ async function main() {
       carbs: 8,
       fat: 42,
       tags: ["Keto", "High-Protein", "Gluten-Free"],
-      img: "keto-salmon",
+      img: "Grilled_salmon.jpg",
     },
     {
       cookId: mert.id,
@@ -87,7 +91,7 @@ async function main() {
       carbs: 46,
       fat: 11,
       tags: ["Vegan", "Dairy-Free"],
-      img: "chickpea-salad",
+      img: "Colorful_healthy_Chickpea_Salad_-_49859083608.jpg",
     },
     {
       cookId: asli.id,
@@ -102,7 +106,7 @@ async function main() {
       carbs: 50,
       fat: 9,
       tags: ["Vegetarian", "High-Protein"],
-      img: "overnight-oats",
+      img: "Cooked_oatmeal_in_bowl_(low_angle).jpg",
     },
     {
       cookId: asli.id,
@@ -117,7 +121,7 @@ async function main() {
       carbs: 38,
       fat: 4,
       tags: ["Vegan", "Low-Carb", "Gluten-Free"],
-      img: "lentil-soup",
+      img: "Rago%C3%BBt_aux_lentilles.jpg",
     },
     {
       cookId: deniz.id,
@@ -132,7 +136,7 @@ async function main() {
       carbs: 55,
       fat: 12,
       tags: ["Vegan", "Gluten-Free"],
-      img: "buddha-bowl",
+      img: "Healthy_Gnocchi_Buddha_Bowl.jpg",
     },
     {
       cookId: deniz.id,
@@ -147,7 +151,7 @@ async function main() {
       carbs: 52,
       fat: 18,
       tags: ["Halal", "High-Protein"],
-      img: "beef-stirfry",
+      img: "Stir_Fried_Wikipedia.jpg",
     },
   ];
 
