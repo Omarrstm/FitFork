@@ -81,6 +81,7 @@ export default function BrowsePage() {
       <div className="flex flex-wrap gap-3 mb-4">
         <input
           type="text"
+          aria-label="Search meals"
           placeholder="Search meals..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -88,6 +89,7 @@ export default function BrowsePage() {
         />
         <input
           type="text"
+          aria-label="Filter by city"
           placeholder="City"
           value={city}
           onChange={(e) => setCity(e.target.value)}
@@ -95,6 +97,7 @@ export default function BrowsePage() {
         />
         <input
           type="number"
+          aria-label="Minimum protein in grams"
           placeholder="Min protein (g)"
           value={minProtein}
           onChange={(e) => setMinProtein(e.target.value)}
@@ -102,6 +105,7 @@ export default function BrowsePage() {
         />
         <input
           type="number"
+          aria-label="Maximum calories"
           placeholder="Max calories"
           value={maxCalories}
           onChange={(e) => setMaxCalories(e.target.value)}

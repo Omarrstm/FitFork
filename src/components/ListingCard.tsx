@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import StarRating from "@/components/StarRating";
 
 type ListingCardData = {
@@ -28,13 +29,14 @@ export default function ListingCard({ listing }: { listing: ListingCardData }) {
       href={`/listings/${listing.id}`}
       className="group flex flex-col bg-white dark:bg-zinc-800/50 rounded-xl overflow-hidden border border-zinc-100 dark:border-zinc-700/50 hover:border-green-300 dark:hover:border-green-700 transition-all hover:shadow-lg hover:shadow-green-500/5"
     >
-      <div className="aspect-video bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+      <div className="relative aspect-video bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
         {listing.imageUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={listing.imageUrl}
             alt={listing.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-200"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-zinc-400 text-sm">

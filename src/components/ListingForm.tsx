@@ -117,8 +117,9 @@ export default function ListingForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label className={labelClass}>Title</label>
+        <label htmlFor="title" className={labelClass}>Title</label>
         <input
+          id="title"
           type="text"
           required
           value={values.title}
@@ -128,8 +129,9 @@ export default function ListingForm({
       </div>
 
       <div>
-        <label className={labelClass}>Description</label>
+        <label htmlFor="description" className={labelClass}>Description</label>
         <textarea
+          id="description"
           required
           rows={4}
           value={values.description}
@@ -139,8 +141,8 @@ export default function ListingForm({
       </div>
 
       <div>
-        <label className={labelClass}>Photo</label>
-        <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleFileChange} />
+        <label htmlFor="photo" className={labelClass}>Photo</label>
+        <input id="photo" type="file" accept="image/jpeg,image/png,image/webp" onChange={handleFileChange} />
         {preview && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -153,8 +155,9 @@ export default function ListingForm({
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className={labelClass}>Price ($)</label>
+          <label htmlFor="price" className={labelClass}>Price ($)</label>
           <input
+            id="price"
             type="number"
             required
             min={0.01}
@@ -165,8 +168,9 @@ export default function ListingForm({
           />
         </div>
         <div>
-          <label className={labelClass}>Servings available</label>
+          <label htmlFor="servings" className={labelClass}>Servings available</label>
           <input
+            id="servings"
             type="number"
             required
             min={1}
@@ -179,8 +183,9 @@ export default function ListingForm({
       </div>
 
       <div>
-        <label className={labelClass}>City</label>
+        <label htmlFor="city" className={labelClass}>City</label>
         <input
+          id="city"
           type="text"
           required
           value={values.city}
@@ -201,10 +206,11 @@ export default function ListingForm({
             ] as const
           ).map(([key, label]) => (
             <div key={key}>
-              <label className="block text-xs text-zinc-500 dark:text-zinc-400 mb-1">
+              <label htmlFor={key} className="block text-xs text-zinc-500 dark:text-zinc-400 mb-1">
                 {label}
               </label>
               <input
+                id={key}
                 type="number"
                 required
                 min={0}

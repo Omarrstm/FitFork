@@ -79,10 +79,11 @@ export default function OrderButton({
   return (
     <div>
       <div className="flex items-center gap-3 mb-4">
-        <label className="text-sm text-zinc-600 dark:text-zinc-400">
+        <label htmlFor="quantity" className="text-sm text-zinc-600 dark:text-zinc-400">
           Quantity
         </label>
         <input
+          id="quantity"
           type="number"
           min={1}
           max={servingsAvailable}

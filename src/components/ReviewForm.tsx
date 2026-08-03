@@ -71,6 +71,7 @@ export default function ReviewForm({ orderId }: { orderId: string }) {
         ))}
       </div>
       <textarea
+        aria-label="Review comment"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="Optional comment..."

@@ -1,5 +1,6 @@
 import { cache } from "react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
@@ -82,13 +83,15 @@ export default async function ListingDetailPage({
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="aspect-square bg-zinc-100 dark:bg-zinc-800 rounded-2xl overflow-hidden">
+        <div className="relative aspect-square bg-zinc-100 dark:bg-zinc-800 rounded-2xl overflow-hidden">
           {listing.imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Image
               src={listing.imageUrl}
               alt={listing.title}
-              className="w-full h-full object-cover"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              priority
+              className="object-cover"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-zinc-400">

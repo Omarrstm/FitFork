@@ -45,10 +45,11 @@ export default function SignInPage() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
             Email
           </label>
           <input
+            id="email"
             type="email"
             required
             placeholder="xxxxxxxx@gmail.com"
@@ -58,10 +59,11 @@ export default function SignInPage() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
             Password
           </label>
           <input
+            id="password"
             type="password"
             required
             placeholder="Enter your password"
