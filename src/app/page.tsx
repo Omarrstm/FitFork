@@ -1,5 +1,4 @@
 import Link from "next/link";
-import CinematicHero from "@/components/CinematicHero";
 
 const features = [
   {
@@ -23,7 +22,6 @@ export default function Home() {
   return (
     <div>
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <CinematicHero />
         <div className="relative max-w-5xl mx-auto px-6 py-28 text-center">
           <p className="text-green-400 font-mono text-sm mb-4 tracking-widest uppercase">
             Home-cooked, tracked to the macro

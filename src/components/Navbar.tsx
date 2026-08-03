@@ -1,16 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
-import { HiMoon, HiSun, HiMenu, HiX } from "react-icons/hi";
-import { useMounted } from "@/lib/useMounted";
+import { HiMenu, HiX } from "react-icons/hi";
 
 export default function Navbar() {
-  const { theme, setTheme } = useTheme();
   const { status } = useSession();
-  const mounted = useMounted();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
@@ -42,16 +38,6 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <HiSun size={16} /> : <HiMoon size={16} />}
-            </button>
-          )}
-
           {status === "authenticated" ? (
             <button
               onClick={() => signOut()}

@@ -1,6 +1,6 @@
-export default function CinematicHero() {
+export default function SiteBackground() {
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden bg-[#070b09]">
+    <div className="fixed inset-0 -z-10 overflow-hidden bg-[#070b09]">
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a140d] via-[#0f1b13] to-[#1c1108]" />
 
       <div className="hero-glow-1 absolute -top-1/4 -left-1/4 w-[80%] h-[80%] bg-green-500/25 rounded-full blur-[100px]" />
