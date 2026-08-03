@@ -10,11 +10,19 @@ Live: https://fitfork-ochre.vercel.app
 <!-- Add screenshots here: landing page, browse grid, listing detail, cook dashboard -->
 
 The live site is seeded with demo listings from 4 cooks (`prisma/seed-demo.ts`)
-so `/browse` isn't empty. To sign in as one of the demo cooks and try the
-dashboard (create/edit listings, manage incoming orders), use:
+so `/browse` isn't empty, plus 11 completed orders with reviews from 3 demo
+buyers (`prisma/seed-reviews.ts`) so ratings show up on listings immediately.
+
+To sign in as a demo cook and try the dashboard (create/edit listings,
+manage incoming orders):
 
 - `elif@demo.fitfork` / `mert@demo.fitfork` / `asli@demo.fitfork` / `deniz@demo.fitfork`
-- password: `Demo1234!`
+
+To sign in as a demo buyer and try leaving a review on a different order:
+
+- `ayse@demo.fitfork` / `burak@demo.fitfork` / `zeynep@demo.fitfork`
+
+Password for all demo accounts: `Demo1234!`
 
 ## Stack
 
@@ -36,6 +44,8 @@ dashboard (create/edit listings, manage incoming orders), use:
 - Orders: a real status lifecycle (`PENDING -> CONFIRMED -> COMPLETED`, or
   `CANCELLED`) enforced server-side via an explicit transition table, with a
   buyer order-history view and a cook incoming-orders dashboard
+- Reviews: buyers can rate (1-5 stars) and comment on completed orders;
+  average ratings show on browse cards and listing detail pages
 
 ## Running locally
 
