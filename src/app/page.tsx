@@ -44,7 +44,7 @@ export default function Home() {
               Browse Meals
             </Link>
             <Link
-              href="/auth/signup"
+              href="/auth/signup?intent=cook"
               className="px-6 py-3 rounded-2xl border border-white/20 text-white font-medium hover:border-green-400 hover:bg-white/5 transition-all duration-200"
             >
               Become a Cook

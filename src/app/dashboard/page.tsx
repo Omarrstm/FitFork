@@ -36,9 +36,21 @@ export default async function DashboardPage() {
       </div>
 
       {listings.length === 0 ? (
-        <p className="text-zinc-600 dark:text-zinc-400">
-          You haven&apos;t listed any meals yet.
-        </p>
+        <div className="bg-white dark:bg-zinc-800/50 rounded-xl p-8 border border-zinc-100 dark:border-zinc-700/50 text-center mb-16">
+          <p className="font-semibold text-zinc-900 dark:text-white mb-2">
+            No listings yet — ready to share your first meal?
+          </p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-5">
+            Add a photo, your macros, and a price to get started. It only
+            takes a couple of minutes.
+          </p>
+          <Link
+            href="/dashboard/new"
+            className="inline-block px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-orange-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-green-500/20 transition-all"
+          >
+            Create Your First Listing
+          </Link>
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {listings.map((listing) => (

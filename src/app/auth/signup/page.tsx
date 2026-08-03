@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export default function SignUpPage() {
+function SignUpForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isCookIntent = searchParams.get("intent") === "cook";
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,17 +49,19 @@ export default function SignUpPage() {
       return;
     }
 
-    router.push("/browse");
+    router.push(isCookIntent ? "/dashboard/new?welcome=1" : "/browse");
     router.refresh();
   }
 
   return (
     <div className="max-w-md mx-auto px-6 py-24">
       <h1 className="text-2xl font-bold text-zinc-900 dark:text-white mb-2">
-        Create your account
+        {isCookIntent ? "Start selling on FitFork" : "Create your account"}
       </h1>
       <p className="text-zinc-600 dark:text-zinc-400 mb-8">
-        Browse meals or start listing your own — one account does both.
+        {isCookIntent
+          ? "Create your account and we'll take you straight to listing your first meal."
+          : "Browse meals or start listing your own — one account does both."}
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -108,7 +113,11 @@ export default function SignUpPage() {
           disabled={loading}
           className="w-full px-6 py-3 rounded-2xl bg-gradient-to-r from-green-600 to-orange-500 text-white font-medium hover:shadow-lg hover:shadow-green-500/20 transition-all disabled:opacity-50"
         >
-          {loading ? "Creating account..." : "Sign Up"}
+          {loading
+            ? "Creating account..."
+            : isCookIntent
+              ? "Create Account & Continue"
+              : "Sign Up"}
         </button>
       </form>
 
@@ -119,5 +128,13 @@ export default function SignUpPage() {
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignUpForm />
+    </Suspense>
   );
 }
