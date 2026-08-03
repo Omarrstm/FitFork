@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiHome } from "react-icons/hi";
 
 export default function Navbar() {
   const { status } = useSession();
@@ -18,12 +18,18 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f1712]/80 backdrop-blur-md border-b border-zinc-100 dark:border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-bold text-lg bg-gradient-to-r from-green-600 to-orange-500 bg-clip-text text-transparent"
-        >
-          FitFork
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            aria-label="Home"
+            className="text-zinc-600 dark:text-zinc-300 hover:text-green-500 dark:hover:text-green-400 transition-colors"
+          >
+            <HiHome size={22} />
+          </Link>
+          <span className="font-bold text-lg bg-gradient-to-r from-green-600 to-orange-500 bg-clip-text text-transparent">
+            FitFork
+          </span>
+        </div>
 
         <div className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400">
           {links.map((link) => (
