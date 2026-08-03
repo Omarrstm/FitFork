@@ -9,6 +9,13 @@ Live: https://fitfork-ochre.vercel.app
 
 <!-- Add screenshots here: landing page, browse grid, listing detail, cook dashboard -->
 
+The live site is seeded with demo listings from 4 cooks (`prisma/seed-demo.ts`)
+so `/browse` isn't empty. To sign in as one of the demo cooks and try the
+dashboard (create/edit listings, manage incoming orders), use:
+
+- `elif@demo.fitfork` / `mert@demo.fitfork` / `asli@demo.fitfork` / `deniz@demo.fitfork`
+- password: `Demo1234!`
+
 ## Stack
 
 - **Next.js (App Router) + TypeScript + Tailwind CSS**
