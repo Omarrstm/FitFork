@@ -1,18 +1,13 @@
+import { cache } from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import OrderButton from "@/components/OrderButton";
 import StarRating from "@/components/StarRating";
 
-export default async function ListingDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  const session = await auth();
-
-  const listing = await prisma.listing.findUnique({
+const getListing = cache(async (id: string) => {
+  return prisma.listing.findUnique({
     where: { id },
     include: {
       cook: { select: { id: true, name: true, city: true, bio: true } },
@@ -23,6 +18,52 @@ export default async function ListingDetailPage({
       },
     },
   });
+});
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const listing = await getListing(id);
+
+  if (!listing || !listing.isActive) {
+    return { title: "Listing not found — FitFork" };
+  }
+
+  const title = `${listing.title} — FitFork`;
+  const description = `${listing.calories} cal · ${listing.protein}g protein per serving, by ${listing.cook.name} in ${listing.city}. ${listing.description}`.slice(
+    0,
+    200
+  );
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: listing.imageUrl ? [{ url: listing.imageUrl }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: listing.imageUrl ? [listing.imageUrl] : undefined,
+    },
+  };
+}
+
+export default async function ListingDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const session = await auth();
+
+  const listing = await getListing(id);
 
   if (!listing || !listing.isActive) notFound();
 
