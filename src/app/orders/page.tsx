@@ -2,6 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import ReviewForm from "@/components/ReviewForm";
+import StarRating from "@/components/StarRating";
 
 const STATUS_STYLES: Record<string, string> = {
   PENDING: "bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300",
@@ -16,7 +18,10 @@ export default async function OrdersPage() {
 
   const orders = await prisma.order.findMany({
     where: { buyerId: session.user.id },
-    include: { listing: { include: { cook: { select: { name: true } } } } },
+    include: {
+      listing: { include: { cook: { select: { name: true } } } },
+      review: true,
+    },
     orderBy: { createdAt: "desc" },
   });
 
@@ -39,27 +44,46 @@ export default async function OrdersPage() {
           {orders.map((order) => (
             <div
               key={order.id}
-              className="bg-white dark:bg-zinc-800/50 rounded-xl p-4 border border-zinc-100 dark:border-zinc-700/50 flex items-center justify-between gap-4"
+              className="bg-white dark:bg-zinc-800/50 rounded-xl p-4 border border-zinc-100 dark:border-zinc-700/50"
             >
-              <div>
-                <Link
-                  href={`/listings/${order.listingId}`}
-                  className="font-medium text-zinc-900 dark:text-white hover:text-green-600 dark:hover:text-green-400"
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <Link
+                    href={`/listings/${order.listingId}`}
+                    className="font-medium text-zinc-900 dark:text-white hover:text-green-600 dark:hover:text-green-400"
+                  >
+                    {order.listing.title}
+                  </Link>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    × {order.quantity} · ${order.totalPrice.toString()} · from{" "}
+                    {order.listing.cook.name}
+                  </p>
+                </div>
+                <span
+                  className={`text-xs font-mono px-3 py-1 rounded-full whitespace-nowrap ${
+                    STATUS_STYLES[order.status] ?? STATUS_STYLES.PENDING
+                  }`}
                 >
-                  {order.listing.title}
-                </Link>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  × {order.quantity} · ${order.totalPrice.toString()} · from{" "}
-                  {order.listing.cook.name}
-                </p>
+                  {order.status}
+                </span>
               </div>
-              <span
-                className={`text-xs font-mono px-3 py-1 rounded-full whitespace-nowrap ${
-                  STATUS_STYLES[order.status] ?? STATUS_STYLES.PENDING
-                }`}
-              >
-                {order.status}
-              </span>
+
+              {order.status === "COMPLETED" && (
+                <div className="mt-3">
+                  {order.review ? (
+                    <div className="flex items-center gap-2">
+                      <StarRating rating={order.review.rating} />
+                      {order.review.comment && (
+                        <span className="text-sm text-zinc-600 dark:text-zinc-400">
+                          &ldquo;{order.review.comment}&rdquo;
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <ReviewForm orderId={order.id} />
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>

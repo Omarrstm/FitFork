@@ -38,3 +38,9 @@ export const ORDER_STATUS_TRANSITIONS: Record<string, string[]> = {
 export const orderStatusUpdateSchema = z.object({
   status: z.enum(["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"]),
 });
+
+export const reviewCreateSchema = z.object({
+  orderId: z.string().min(1),
+  rating: z.number().int().min(1, "Rating must be at least 1").max(5, "Rating must be at most 5"),
+  comment: z.string().max(1000).optional(),
+});

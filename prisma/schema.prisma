@@ -23,6 +23,7 @@ model User {
   createdAt    DateTime  @default(now())
   listings     Listing[] @relation("CookListings")
   orders       Order[]   @relation("BuyerOrders")
+  reviews      Review[]  @relation("BuyerReviews")
 }
 
 model Listing {
@@ -43,6 +44,7 @@ model Listing {
   createdAt   DateTime         @default(now())
   dietTags    ListingDietTag[]
   orders      Order[]
+  reviews     Review[]
 }
 
 model DietTag {
@@ -78,4 +80,18 @@ model Order {
   status     OrderStatus @default(PENDING)
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
+  review     Review?
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  orderId   String   @unique
+  order     Order    @relation(fields: [orderId], references: [id])
+  listingId String
+  listing   Listing  @relation(fields: [listingId], references: [id])
+  buyerId   String
+  buyer     User     @relation("BuyerReviews", fields: [buyerId], references: [id])
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
 }

@@ -17,6 +17,7 @@ type Listing = {
   city: string;
   cook: { name: string };
   dietTags: { dietTag: { name: string } }[];
+  reviews: { rating: number }[];
 };
 
 export default function BrowsePage() {

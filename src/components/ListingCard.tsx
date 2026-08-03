@@ -1,4 +1,5 @@
 import Link from "next/link";
+import StarRating from "@/components/StarRating";
 
 type ListingCardData = {
   id: string;
@@ -13,9 +14,15 @@ type ListingCardData = {
   city: string;
   cook: { name: string };
   dietTags: { dietTag: { name: string } }[];
+  reviews: { rating: number }[];
 };
 
 export default function ListingCard({ listing }: { listing: ListingCardData }) {
+  const avgRating =
+    listing.reviews.length > 0
+      ? listing.reviews.reduce((sum, r) => sum + r.rating, 0) / listing.reviews.length
+      : null;
+
   return (
     <Link
       href={`/listings/${listing.id}`}
@@ -44,9 +51,17 @@ export default function ListingCard({ listing }: { listing: ListingCardData }) {
             ${listing.price}
           </span>
         </div>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-3">
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-1">
           by {listing.cook.name} · {listing.city}
         </p>
+        {avgRating !== null && (
+          <div className="flex items-center gap-1.5 mb-3">
+            <StarRating rating={avgRating} size={13} />
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">
+              {avgRating.toFixed(1)} ({listing.reviews.length})
+            </span>
+          </div>
+        )}
         <div className="flex flex-wrap gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-3">
           <span>{listing.calories} cal</span>
           <span>·</span>

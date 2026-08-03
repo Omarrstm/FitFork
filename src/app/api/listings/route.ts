@@ -39,6 +39,7 @@ export async function GET(request: Request) {
     include: {
       cook: { select: { id: true, name: true, city: true } },
       dietTags: { include: { dietTag: true } },
+      reviews: { select: { rating: true } },
     },
     orderBy: { createdAt: "desc" },
   });
