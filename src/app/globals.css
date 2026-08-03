@@ -32,3 +32,33 @@ body {
   background: #16a34a;
   color: #fff;
 }
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(-50%, -60%) rotate(18deg); }
+  50%      { transform: translate(-38%, -45%) rotate(18deg); }
+}
+
+@keyframes drift-b {
+  0%, 100% { transform: translate(-50%, -35%) rotate(-14deg); }
+  50%      { transform: translate(-62%, -50%) rotate(-14deg); }
+}
+
+@keyframes drift-c {
+  0%, 100% { transform: translate(-50%, -50%) rotate(6deg); }
+  50%      { transform: translate(-45%, -58%) rotate(6deg); }
+}
+
+.bg-line-a {
+  animation: drift-a 24s ease-in-out infinite;
+  will-change: transform;
+}
+
+.bg-line-b {
+  animation: drift-b 30s ease-in-out infinite;
+  will-change: transform;
+}
+
+.bg-line-c {
+  animation: drift-c 20s ease-in-out infinite;
+  will-change: transform;
+}
