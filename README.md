@@ -31,6 +31,7 @@ Password for all demo accounts: `Demo1234!`
 - **NextAuth (Auth.js) v5** — Credentials provider, JWT sessions
 - **Vercel Blob** for listing photo uploads
 - **Zod** for API input validation
+- **Vitest** for unit and integration tests
 - Deployed on **Vercel**
 
 ## Features
@@ -63,6 +64,20 @@ DATABASE_URL=postgres://...
 AUTH_SECRET=...           # generate with: openssl rand -base64 32
 BLOB_READ_WRITE_TOKEN=... # from a Vercel Blob store, for photo uploads
 ```
+
+## Testing
+
+```bash
+npm test          # run once (Vitest)
+npm run test:watch
+```
+
+Unit tests cover the trickier validation logic (including a regression test
+for a bug where partial listing updates silently wiped diet tags) and the
+order status transition table. Integration-style tests exercise the
+`/api/orders/[id]` and `/api/reviews` route handlers directly with mocked
+Prisma/auth, covering auth checks, ownership checks, and the business rules
+around order status transitions and review eligibility.
 
 ## Notes
 
